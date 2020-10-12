@@ -50,7 +50,7 @@ class Adapter(var News:MutableList<NewsModel>, var listener:(NewsModel)->Unit): 
 
         // checks if entity is present; if present it changes the color of the icon to purple
         if (dbNews.getNewsDao().getCount(Newsitem.title) == 1)
-        holder.itemView.menuIcon.setColorFilter(Color.parseColor("#6200EE"))
+            holder.itemView.menuIcon.setColorFilter(Color.parseColor("#6200EE"))
 
         holder.itemView.menuIcon.setOnClickListener {
             // checks if entity is present; if present the entity will get saved , icon changes to purple and a toast will be shown
@@ -73,8 +73,8 @@ class Adapter(var News:MutableList<NewsModel>, var listener:(NewsModel)->Unit): 
     fun appendNews(updateNews: List<NewsModel>){
         this.News!!.addAll(updateNews)
         notifyItemRangeInserted(
-        this.News!!.size,
-       News!!.size - 1
+            this.News!!.size,
+            News!!.size - 1
         )
     }
 }

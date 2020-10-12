@@ -23,7 +23,7 @@ class NewsViewModel : ViewModel() {
         {
             // if callback didn't succeed, the higher order function will get invoked
             override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
-              isSuccess.value=false }
+                isSuccess.value=false }
 
             // enters the data to live data when the response isn't null
             override fun onResponse(

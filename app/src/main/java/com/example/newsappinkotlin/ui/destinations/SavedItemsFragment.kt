@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsappinkotlin.R
 import com.example.newsappinkotlin.database.NewsDatabase
 import com.example.newsappinkotlin.model.NewsModel
+import com.example.newsappinkotlin.ui.ViewModel.NewsViewModel
 import com.example.newsappinkotlin.ui.adapter.Adapter
 import kotlinx.android.synthetic.main.fragment_saved_items.*
 
@@ -28,7 +30,7 @@ class SavedItemsFragment : Fragment() {
 
         dbNews = NewsDatabase.getSavedItems(requireActivity().applicationContext)
         // gets entity from database
-        Adapter = Adapter(dbNews.getNewsDao().getAllSavedNews() as MutableList<NewsModel>,{ onClickCard()} )
+        Adapter = Adapter(dbNews.getNewsDao().getAllSavedNews() as MutableList<NewsModel>,{ e -> onClickCard(e)} )
         llm = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
 
         rv_saved.adapter = Adapter
@@ -36,7 +38,9 @@ class SavedItemsFragment : Fragment() {
     }
 
     // navigates to the ItemDetailsFragment
-    fun onClickCard() {
+    fun onClickCard(new : NewsModel) {
+        var newsViewModel: NewsViewModel = ViewModelProvider(requireActivity()).get(NewsViewModel::class.java)
+        newsViewModel.onNewsModelSelected(new)
         findNavController().navigate(R.id.action_savedItemsFragment_to_itemDetailsFragment) }
 
 }
